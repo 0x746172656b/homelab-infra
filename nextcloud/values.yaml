@@ -1100,7 +1100,7 @@ extraManifests:
         - match: Host(`nextcloud.local.khider.fr`)
           kind: Rule
           services:
-            - name: nextcloud
+            - name: nextcloud-nextcloud
               port: 8080
       tls:
         secretName: nextcloud-tls-secret
