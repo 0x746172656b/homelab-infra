@@ -6,13 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: jellyfin
-    repoURL: https://github.com/0x746172656b/homelab/
+    repoURL: https://github.com/0x746172656b/homelab
     targetRevision: main
     path: jellyfin
-    helm:
-      valueFiles:
-        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: media

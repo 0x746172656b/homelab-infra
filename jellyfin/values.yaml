@@ -5,5 +5,5 @@ jellyfin:
   persistence:
     config:
       enabled: true
-      size: 20Gi
-      storageClass: "local-path"
+      size: 10Gi
+      storageClass: "longhorn"
