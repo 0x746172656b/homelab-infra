@@ -1,0 +1,27 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: use template to generate README.md
+apiVersion: v2
+appVersion: 4.0.17.2953
+dependencies:
+- name: common
+  repository: https://bjw-s-labs.github.io/helm-charts/
+  version: 1.5.1
+description: Smart PVR for newsgroup and bittorrent users
+home: https://github.com/pree/helm-charts/tree/master/charts/sonarr
+icon: https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/512.png
+keywords:
+- sonarr
+- servarr
+- torrent
+- usenet
+maintainers:
+- email: pascal@reeb.io
+  name: pree
+name: sonarr
+sources:
+- https://github.com/Sonarr/Sonarr
+- https://github.com/home-operations/containers
+type: application
+version: 1.13.0
