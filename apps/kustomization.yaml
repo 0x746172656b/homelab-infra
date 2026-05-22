@@ -4,3 +4,8 @@ resources:
   - source.yaml
   - sonarr-release.yaml
   - sonarr-ingress.yaml
+
+configMapGenerator:
+  - name: sonarr-values
+    files:
+      - values.yaml=values.yaml

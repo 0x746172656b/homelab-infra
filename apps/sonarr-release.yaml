@@ -13,5 +13,6 @@ spec:
         kind: HelmRepository
         name: bjw-s-charts
         namespace: media
-  valuesFiles:
-  - ./apps/values.yaml
+  valuesFrom:
+    - kind: ConfigMap
+      name: sonarr-values
