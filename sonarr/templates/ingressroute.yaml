@@ -11,7 +11,7 @@ spec:
     - kind: Rule
       match: Host(`sonarr.local.khider.fr`)
       services:
-        - name: sonarr-prod
+        - name: sonarr-main
           port: 8989
   tls:
     secretName: sonarr-cert
