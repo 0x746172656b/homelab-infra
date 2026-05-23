@@ -6,7 +6,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/linuxserver/sonarr
-            tag: 4.0.17.2967
+            tag: 4.0.17.2952-ls312
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
