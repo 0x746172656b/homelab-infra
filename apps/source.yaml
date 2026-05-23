@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: bjw-s-charts
-  namespace: media
-spec:
-  url: https://bjw-s-labs.github.io/helm-charts/
-  interval: 24h
