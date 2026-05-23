@@ -16,6 +16,10 @@ app-template:
       type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 3Gi
+    media:
+      type: nfs
+      server: 10.10.93.22
+      path: /volume1/Jellyfin
   service:
     main:
       controller: sonarr
