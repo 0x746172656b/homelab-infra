@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`sonarr.local.khider.fr`)
+      match: Host(`sonarr.local.khider.fr`) || Host(`sonarr.khider.fr`)
       services:
         - name: sonarr
           port: 8989
