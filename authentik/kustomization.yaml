@@ -1,0 +1,9 @@
+resources:
+  - cert.yaml
+  - ingress.yaml
+  - sealed-secret.yaml
+helmCharts:
+  - name: authentik
+    repo: https://charts.goauthentik.io
+    version: 2026.5.0
+    valuesFile: values.yaml
