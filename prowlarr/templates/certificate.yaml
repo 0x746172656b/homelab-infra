@@ -10,3 +10,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - prowlarr.local.khider.fr
+    - prowlarr.khider.fr
