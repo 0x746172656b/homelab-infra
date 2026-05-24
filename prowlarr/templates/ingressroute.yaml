@@ -12,11 +12,11 @@ spec:
       match: Host(`prowlarr.khider.fr`)
       services:
         - name: prowlarr
-          port: 8989
+          port: 9696
     - kind: Rule
       match: Host(`prowlarr.local.khider.fr`)
       services:
         - name: prowlarr
-          port: 8989
+          port: 9696
   tls:
     secretName: prowlarr-cert
