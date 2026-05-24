@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/library/common/values.schema.json
+app-template:
+  controllers:
+    prowlarr:
+      containers:
+        main:
+          image:
+            repository: ghcr.io/linuxserver/prowlarr
+            tag: 2.3.5
+  defaultPodOptions:
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
+  persistence:
+    config:
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 3Gi
+  service:
+    main:
+      controller: prowlarr
+      ports:
+        http:
+          port: 9696
+  ingress:
+    main:
+      enabled: false
