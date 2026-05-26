@@ -8,7 +8,7 @@
       "customType": "regex",
       "fileMatch": ["(^|/)helm-release\\.yaml$"],
       "matchStrings": [
-        "repository:\\s*(?<depName>ghcr\\.io/[^\\s\\n]+)\\s*\\n\\s*tag:\\s*(?<currentValue>[^\\s\\n]+)"
+        "repository:\\s*(?<depName>[^\\s\\n]+)\\s*\\n\\s*tag:\\s*(?<currentValue>[^\\s\\n]+)"
       ],
       "datasourceTemplate": "docker"
     }
