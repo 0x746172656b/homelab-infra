@@ -5,7 +5,7 @@
   ],
   "customManagers": [
     {
-      "customType": "helm-release",
+      "customType": "regex",
       "fileMatch": ["(^|/)helm-release\\.yaml$"],
       "matchStrings": [
         "repository:\\s*(?<depName>[^\\s\\n]+)\\s*\\n\\s*tag:\\s*(?<currentValue>[^\\s\\n]+)"
