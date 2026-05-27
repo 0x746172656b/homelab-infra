@@ -16,6 +16,7 @@ spec:
         name: bjw-s-charts
         namespace: flux-system
 
+    values:
     controllers:
       prowlarr:
         containers:
