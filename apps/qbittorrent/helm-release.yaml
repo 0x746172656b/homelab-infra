@@ -16,6 +16,17 @@ spec:
         name: bjw-s-charts
         namespace: flux-system
 
+  valuesFrom:
+      - kind: Secret
+        name: qbittorrent-vpn-secret
+        valuesKey: wg_private_key
+        targetPath: controllers.qbittorrent.initContainers.vpn.env[2].value
+      - kind: Secret
+        name: qbittorrent-vpn-secret
+        valuesKey: wg_address
+        targetPath: controllers.qbittorrent.initContainers.vpn.env[3].value
+
+
   values:
     defaultPodOptions:
       securityContext:
@@ -29,6 +40,41 @@ spec:
 
     controllers:
       qbittorrent:
+        annotations:
+          secret.reloader.stakater.com/reload: qbittorrent-vpn-secret
+        
+        initContainers:
+          vpn:
+            image:
+              repository: qmcgaw/gluetun
+              tag: v3.41.1
+              pullPolicy: IfNotPresent
+            restartPolicy: Always
+            env:
+              - name: VPN_SERVICE_PROVIDER
+                value: surfshark
+              - name: VPN_TYPE
+                value: wireguard
+              - name: WIREGUARD_PRIVATE_KEY
+                value: "${surfshark_wg_private_key}"
+              - name: WIREGUARD_ADDRESSES
+                value: "${surfshark_wg_address}"
+              - name: SERVER_COUNTRIES
+                value: France
+              - name: FIREWALL_INPUT_PORTS
+                value: "80"
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                add: ["NET_ADMIN"]
+                drop: ["ALL"]
+
         containers:
           app:
             image:
@@ -55,6 +101,7 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 1Gi
+        
       media:
         type: nfs
         server: nas.local.khider.fr
