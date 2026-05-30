@@ -64,3 +64,14 @@ spec:
       tmp:
         type: emptyDir
         sizeLimit: 1Gi
+
+    service:
+      main:
+        controller: qbittorrent
+        ports:
+          http:
+            port: *port
+ 
+    ingress:
+      main:
+        enabled: false
