@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: ghcr.io/jellyfin/jellyfin
-              tag: 10.9.11
+              tag: 10.8.13
     
     defaultPodOptions:
       securityContext:
