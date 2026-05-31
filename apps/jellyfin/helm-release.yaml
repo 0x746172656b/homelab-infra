@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/library/common/values.schema.json
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: app-template
+      version: 5.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-charts
+        namespace: flux-system
+  values:
+    nameOverride: jellyfin-prod
+
+    controllers:
+      jellyfin:
+        containers:
+          main:
+            image:
+              repository: jellyfin/jellyfin
+              tag: 10.11.8
+    
+    defaultPodOptions:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+          
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        existingClaim: jellyfin-config-pvc
+        globalMounts:
+          - path: /config
+      media:
+        type: nfs
+        server: nas.local.khider.fr
+        path: /volume1/Jellyfin
+        globalMounts:
+          - path: /data
+          
+    service:
+      main:
+        controller: jellyfin
+        ports:
+          http:
+            port: 8096
+ 
+    ingress:
+      main:
+        enabled: false
