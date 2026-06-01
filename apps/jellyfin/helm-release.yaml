@@ -25,18 +25,23 @@ spec:
             image:
               repository: jellyfin/jellyfin
               tag: 10.11.8
-    
+            securityContext:
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              capabilities:
+                add:
+                  - SYS_ADMIN #
+
     defaultPodOptions:
       nodeSelector:
         kubernetes.io/hostname: talos-tun-a0x
-      podSecurityContext:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
         supplementalGroups:
           - 44
           - 107
           - 109
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
           
     persistence:
       config:
@@ -50,7 +55,7 @@ spec:
         path: /volume1/Jellyfin
         globalMounts:
           - path: /data
-    dri:
+      dri:
         type: hostPath
         hostPath: /dev/dri
         globalMounts:
