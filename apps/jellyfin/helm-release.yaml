@@ -25,8 +25,19 @@ spec:
             image:
               repository: jellyfin/jellyfin
               tag: 10.8.13
+            resources:
+              limits:
+                gpu.intel.com/i915: 1
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities:
+                drop:
+                  - ALL
     
     defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: talos-tun-a0x
       securityContext:
         seccompProfile:
           type: RuntimeDefault
@@ -43,6 +54,11 @@ spec:
         path: /volume1/Jellyfin
         globalMounts:
           - path: /data
+    dri:
+        type: hostPath
+        hostPath: /dev/dri
+        globalMounts:
+          - path: /dev/dri
           
     service:
       main:
