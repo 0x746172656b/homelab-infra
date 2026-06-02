@@ -1,18 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/(^|/)helm-release\\.yaml$/"
-      ],
-      "matchStrings": [
-        "repository:\\s*(?<depName>[^\\s\\n]+)\\s*\\n\\s*tag:\\s*(?<currentValue>[^\\s\\n]+)"
-      ],
-      "datasourceTemplate": "docker"
-    }
-  ]
+  "extends": ["config:recommended"],
+  "flux": {
+    "managerFilePatterns": ["/(^|/)helm-(release|repository)\\.yaml$/"]
+  }
 }
