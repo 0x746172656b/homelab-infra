@@ -37,15 +37,20 @@ spec:
   values:
     replicaCount: 1
     authentik:
-        secret_key_secret: authentik-secrets
-        error_reporting:
-            enabled: false
-        postgresql:
-            password_secret: authentik-secrets
+      secret_key_secret: authentik-secrets
+      error_reporting:
+        enabled: false
+      postgresql:
+        password_secret: authentik-secrets
     server:
-        ingress:
-            enabled: false
-    postgresql:
+      service:
         enabled: true
-        auth:
-            existingSecret: authentik-secrets
+        type: NodePort
+        servicePortHttp: 80
+        nodePortHttp: 32000
+      ingress:
+        enabled: false
+    postgresql:
+      enabled: true
+      auth:
+        existingSecret: authentik-secrets
