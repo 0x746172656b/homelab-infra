@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`authentik.local.khider.fr`) || Host(`authentik.khider.fr`) 
+      match: Host(`authentik.khider.fr`) 
       services:
         - name: authentik-server
           port: 80
