@@ -12,8 +12,5 @@ spec:
       services:
         - name: prowlarr
           port: 9696
-      middlewares:
-        - name: prowlarr-middleware
-          namespace: traefik
   tls:
     secretName: prowlarr-cert
