@@ -35,7 +35,7 @@ spec:
 
     defaultPodOptions:
       nodeSelector:
-        kubernetes.io/hostname: talos-tun-a0x
+        kubernetes.io/hostname: talos-i9c-53p
       securityContext:
         seccompProfile:
           type: RuntimeDefault
