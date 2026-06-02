@@ -13,7 +13,7 @@ spec:
       services:
         - name: sonarr
           port: 8989
-      middlwares:
+      middlewares:
         - name: sonarr-middleware
           namespace: media
   tls:
