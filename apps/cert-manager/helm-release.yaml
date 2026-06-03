@@ -4,6 +4,7 @@ metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
+  releaseName: cert-manager
   targetNamespace: cert-manager
   install:
     createNamespace: true
