@@ -38,7 +38,7 @@ spec:
         size: 3Gi
       media:
         type: nfs
-        server: 10.10.93.22
+        server: nas.local.khider.fr
         path: /volume1/Jellyfin
         globalMounts:
           - path: /data
