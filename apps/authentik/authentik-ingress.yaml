@@ -28,3 +28,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - authentik.local.khider.fr
+    - authentik.khider.fr
