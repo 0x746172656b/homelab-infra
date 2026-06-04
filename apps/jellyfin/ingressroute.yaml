@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`jellyfin.local.khider.fr`) || Host(`jellyfin.khider.fr`) |
+      match: Host(`jellyfin.local.khider.fr`) || Host(`jellyfin.khider.fr`)
       services:
         - name: jellyfin
           port: 8096
