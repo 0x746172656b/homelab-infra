@@ -26,12 +26,11 @@ spec:
               repository: jellyfin/jellyfin
               tag: 10.11.8
             securityContext:
-              privileged: true
-              allowPrivilegeEscalation: true
+              privileged: false
+              allowPrivilegeEscalation: false
               readOnlyRootFilesystem: false
               capabilities:
-                add:
-                  - SYS_ADMIN #
+                drop: [ ALL ]
 
     defaultPodOptions:
       nodeSelector:
@@ -40,35 +39,35 @@ spec:
         seccompProfile:
           type: RuntimeDefault
         supplementalGroups:
-          - 44
-          - 107
-          - 109
-          
+        - 44
+        - 107
+        - 109
+
     persistence:
       config:
         type: persistentVolumeClaim
         existingClaim: jellyfin-config-pvc
         globalMounts:
-          - path: /config
+        - path: /config
       media:
         type: nfs
         server: nas.local.khider.fr
         path: /volume1/Jellyfin
         globalMounts:
-          - path: /data
+        - path: /data
       dri:
         type: hostPath
         hostPath: /dev/dri
         globalMounts:
-          - path: /dev/dri
-          
+        - path: /dev/dri
+
     service:
       main:
         controller: jellyfin
         ports:
           http:
             port: 8096
- 
+
     ingress:
       main:
         enabled: false
