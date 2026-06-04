@@ -22,15 +22,16 @@ spec:
       jellyfin:
         containers:
           main:
+            env: 
+              JELLYFIN_FFMPEG_OPT_DISABLE_VAAPI_FILTERS: "1"
             image:
               repository: jellyfin/jellyfin
               tag: 10.11.8
             securityContext:
               privileged: true
               allowPrivilegeEscalation: true
-              readOnlyRootFilesystem: false
               capabilities:
-                drop: [ ALL ]
+                drop: []
 
     defaultPodOptions:
       nodeSelector:
