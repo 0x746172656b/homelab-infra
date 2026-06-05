@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: jellyfin/jellyfin
-              tag: 10.11.8
+              tag: 10.11.10
             securityContext:
               privileged: true
               allowPrivilegeEscalation: true
@@ -53,7 +53,7 @@ spec:
         server: nas.local.khider.fr
         path: /volume1/Jellyfin
         globalMounts:
-        - path: /data
+        - path: /media
       dri:
         type: hostPath
         hostPath: /dev/dri
