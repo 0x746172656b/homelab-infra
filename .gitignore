@@ -13,3 +13,6 @@ id_rsa*
 !.env.example
 secret*.yaml
 !secret*.sops.yaml
+
+# Added by ggshield
+.cache_ggshield
