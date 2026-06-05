@@ -53,7 +53,7 @@ spec:
         server: nas.local.khider.fr
         path: /volume1/Jellyfin
         globalMounts:
-        - path: /data
+        - path: /media
       dri:
         type: hostPath
         hostPath: /dev/dri
