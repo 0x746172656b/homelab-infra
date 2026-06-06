@@ -1,1 +1,18 @@
 .DS_Store
+Thumbs.db
+
+*.pem
+*.key
+*.crt
+*.p12
+id_rsa*
+*.gpg
+*.asc
+.env
+.env.*
+!.env.example
+secret*.yaml
+!secret*.sops.yaml
+
+# Added by ggshield
+.cache_ggshield
