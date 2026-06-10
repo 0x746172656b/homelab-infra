@@ -6,6 +6,10 @@ metadata:
   namespace: media
 spec:
   interval: 10m
+  install:
+    disableSchemaValidation: true
+  upgrade:
+    disableSchemaValidation: true
   chart:
     spec:
       chart: app-template
@@ -25,7 +29,7 @@ spec:
               tag: 10.11.11
             resources:
               limits:
-              "devic.es/dri": 1
+                "devic.es/dri": 1
             securityContext:
               allowPrivilegeEscalation: false
               capabilities:
