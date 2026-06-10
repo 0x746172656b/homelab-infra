@@ -23,7 +23,7 @@ spec:
           main:
             image:
               repository: ghcr.io/linuxserver/prowlarr
-              tag: 2.3.5
+              tag: 2.4.0
     
     defaultPodOptions:
       securityContext:
