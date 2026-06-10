@@ -26,8 +26,8 @@ spec:
               repository: jellyfin/jellyfin
               tag: 10.11.11
             securityContext:
-              privileged: true
-              allowPrivilegeEscalation: true
+              privileged: false
+              allowPrivilegeEscalation: false
               capabilities:
                 drop: []
 
