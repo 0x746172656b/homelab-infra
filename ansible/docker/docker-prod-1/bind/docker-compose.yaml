@@ -1,0 +1,17 @@
+services:
+  bind9:
+    container_name: dns-bind-1
+    image: ubuntu/bind9:latest
+    user: "root"
+    environment:
+      - BIND9_USER=root
+      - TZ=Europe/Paris
+    ports:
+      - "10.10.93.10:53:53/tcp"
+      - "10.10.93.10:53:53/udp"
+    volumes:
+      - ./config:/etc/bind
+      - ./cache:/var/cache/bind
+      - ./records:/var/lib/bind
+    restart: unless-stopped
+

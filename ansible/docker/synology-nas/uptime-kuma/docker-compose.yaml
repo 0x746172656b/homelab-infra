@@ -1,0 +1,16 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2.4.0
+    container_name: uptime-kuma
+    restart: always
+    ports:
+      - "3001:3001"
+    volumes:
+      - /volume2/docker/uptime-kuma:/app/data
+    environment:
+      - TZ=Europe/Paris
+    networks:
+      - kuma_network
+networks:
+  kuma_network:
+    driver: bridge

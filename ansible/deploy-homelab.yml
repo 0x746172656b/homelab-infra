@@ -1,0 +1,36 @@
+---
+- name: Sync Synology NAS Docker Stacks
+  hosts: synology
+  become: yes
+  become_method : sudo
+  become_user: root
+  vars:
+    base_dir: "/volume2/docker"
+    repo_dir: "docker/synology-nas"
+    docker_cli: "/usr/local/bin/docker"
+    docker_stacks:
+      - mariadb-prod
+      - qbittorrent-prod
+      - uptime-kuma
+
+  tasks:
+    - name: Run NAS Deployments
+      include_tasks: tasks/deploy_stacks.yaml
+      loop: "{{ docker_stacks }}"
+
+- name: Sync Ubuntu VM Docker Stacks
+  hosts: ubuntu_hosts
+  vars:
+    base_dir: "/home/tarek"
+    repo_dir: "docker/docker-prod-1"
+    docker_stacks:
+      - bind
+      - gitlab
+      - nextcloud
+      - npm
+      - traefik
+
+  tasks:
+    - name: Run Ubuntu Deployments
+      include_tasks: tasks/deploy_stacks.yaml
+      loop: "{{ docker_stacks }}"
