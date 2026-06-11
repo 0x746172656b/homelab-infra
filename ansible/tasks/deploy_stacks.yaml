@@ -30,5 +30,5 @@
     project_src: "{{ base_dir }}/{{ item }}"
     files:
       - "{{ target_filename }}"
-    docker_cli: /usr/local/bin/docker
+    docker_cli: "{{ docker_cli }}"
     state: present

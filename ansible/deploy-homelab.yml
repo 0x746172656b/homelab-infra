@@ -23,6 +23,7 @@
   vars:
     base_dir: "/home/tarek"
     repo_dir: "docker/docker-prod-1"
+    docker_cli: "/usr/bin/docker"
     docker_stacks:
       - bind
       - gitlab
