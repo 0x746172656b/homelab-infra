@@ -1,0 +1,30 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-ingress-route
+  namespace: grafana
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`grafana.local.khider.fr`)
+      services:
+        - name: grafana-service
+          port: 3000
+  tls:
+    secretName: grafana-cert
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana.local.khider.fr-cert
+  namespace: grafana
+spec:
+  secretName: grafana-cert
+  issuerRef:
+    name: cloudflare-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - grafana.local.khider.fr
