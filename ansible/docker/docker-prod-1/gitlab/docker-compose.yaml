@@ -16,9 +16,9 @@ services:
       - '10.10.93.145:443:443'
       - '10.10.93.145:22:22'
     volumes:
-      - '$GITLAB_HOME/config:/etc/gitlab'
-      - '$GITLAB_HOME/logs:/var/log/gitlab'
-      - '$GITLAB_HOME/data:/var/opt/gitlab'
+      - './config:/etc/gitlab'
+      - './logs:/var/log/gitlab'
+      - './data:/var/opt/gitlab'
       - '/home/tarek/.acme.sh/gitlab.local.khider.fr_ecc:/etc/gitlab/ssl:ro'
     shm_size: '256m'
 
