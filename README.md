@@ -1,23 +1,20 @@
-# Homelab GitOps Cluster
+# Homelab
 
-Automated Kubernetes cluster management using Flux v2. This repository maintains the state of the `homelab-prod` cluster, deploying infrastructure components and media applications automatically.
-
----
-
-## Repository Structure
-
-* **`apps/`**: Application workloads categorized by service (e.g., Jellyfin, Sonarr, Authentik). Includes Helm releases and ingress routing configurations.
-* **`clusters/`**: Cluster-specific bootstrap configurations. Contains the core Flux controllers and synchronization manifests.
-* **`infrastructure/`**: Core cluster utilities and shared Helm repositories required by foundational services.
-
----
+GitOps-driven homelab managed with Flux v2 and Ansible.
 
 ## Core Components
 
-| Component | Purpose |
-| :--- | :--- |
-| **Flux CD** | GitOps automation and synchronization engine |
-| **Traefik** | Ingress controller and routing proxy |
-| **Cert-Manager** | Automated TLS certificate management via Cloudflare DNS |
-| **Authentik** | Identity provider and authentication gateway |
-| **Renovate** | Automated dependency and Helm chart updates |
+- **Flux CD** — GitOps engine, reconciles cluster state from this repo
+- **Traefik** — ingress controller and reverse proxy
+- **Cert-Manager** — automated TLS via Cloudflare DNS
+- **Authentik** — SSO and identity provider
+- **Grafana** — metrics and dashboards
+- **Renovate** — automated dependency updates
+
+## Ansible
+
+Manages Docker Compose workloads on non-Kubernetes hosts. Triggered automatically via GitHub Actions on push to `main`.
+
+## Storage
+
+Persistent volumes are provisioned over iSCSI using the Synology CSI driver.
