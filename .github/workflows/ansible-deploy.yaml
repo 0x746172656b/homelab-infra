@@ -35,3 +35,4 @@ jobs:
         run: |
           cd ansible
           ansible-playbook -i inventory.ini deploy-homelab.yml
+          docker image prune -af
