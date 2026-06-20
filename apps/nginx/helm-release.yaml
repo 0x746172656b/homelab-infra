@@ -27,3 +27,11 @@ spec:
       enabled: true
       repository: https://github.com/0x746172656b/khider.fr
       branch: main
+      gitClone:
+        command:
+          - /bin/bash
+          - -ec
+          - |
+            export HOME=/tmp
+            rm -rf /app/..?* /app/.[!.]* /app/* 2>/dev/null || true
+            git clone https://github.com/0x746172656b/khider.fr --branch main /app
