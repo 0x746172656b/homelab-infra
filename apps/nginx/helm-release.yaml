@@ -25,5 +25,5 @@ spec:
   values:
     cloneStaticSiteFromGit:
       enabled: true
-      repository: git@github.com:0x746172656b/khider.fr.git
+      repository: https://github.com/0x746172656b/khider.fr
       branch: master
