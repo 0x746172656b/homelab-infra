@@ -26,12 +26,4 @@ spec:
     cloneStaticSiteFromGit:
       enabled: true
       repository: https://github.com/0x746172656b/khider.fr
-      branch: master
-      gitClone:
-        command:
-          - /bin/bash
-          - -ec
-          - |
-            export HOME=/tmp
-            rm -rf /app/..?* /app/.[!.]* /app/* 2>/dev/null || true
-            git clone https://github.com/0x746172656b/khider.fr --branch master /app
+      branch: main
