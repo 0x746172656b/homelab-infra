@@ -24,7 +24,7 @@ spec:
     - kind: Rule
       match: Host(`nginx.local.khider.fr`) 
       services:
-        - name: nginx-server
+        - name: nginx
           port: 80
   tls:
     secretName: nginx-cert
