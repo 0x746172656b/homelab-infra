@@ -1,3 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx.local.khider.fr-cert
+  namespace: nginx
+spec:
+  secretName: nginx-cert
+  issuerRef:
+    name: cloudflare-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - nginx.local.khider.fr
+---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
@@ -15,17 +28,3 @@ spec:
           port: 80
   tls:
     secretName: nginx-cert
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: nginx.local.khider.fr-cert
-  namespace: nginx
-spec:
-  secretName: nginx-cert
-  issuerRef:
-    name: cloudflare-issuer
-    kind: ClusterIssuer
-  dnsNames:
-    - nginx.local.khider.fr
-    - nginx.khider.fr
