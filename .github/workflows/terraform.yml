@@ -84,13 +84,13 @@ jobs:
 
     - name: Terraform Plan
       env:
-        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         TF_VAR_home_ip: ${{ secrets.TF_VAR_home_ip }}
       run: terraform plan -input=false
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       env:
-        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         TF_VAR_home_ip: ${{ secrets.TF_VAR_home_ip }}
       run: terraform apply -auto-approve -input=false
