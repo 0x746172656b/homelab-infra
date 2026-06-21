@@ -14,5 +14,28 @@ id_rsa*
 secret*.yaml
 !secret*.sops.yaml
 
-# Added by ggshield
 .cache_ggshield
+
+**/.terraform/*
+
+*.tfstate
+*.tfstate.*
+
+crash.log
+crash.*.log
+
+*.tfvars
+*.tfvars.json
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+*.tfplan
+*.plan
+
+.terraform.tfstate.lock.info
+
+.terraformrc
+terraform.rc
