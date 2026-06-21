@@ -40,7 +40,7 @@ resource "cloudflare_dns_record" "terraform_managed_resource_db500326295bc66afa4
 
 resource "cloudflare_dns_record" "terraform_managed_resource_db50032629test5bc66afa482ec08db3c537_2" {
   content = "khider.fr"
-  name    = "teest.khider.fr"
+  name    = "test.khider.fr"
   proxied = true
   ttl     = 1
   type    = "CNAME"
