@@ -8,6 +8,7 @@ resource "cloudflare_dns_record" "terraform_managed_resource_a9d2d83ab29f5e42a77
   content  = var.home_ip
   name     = "khider.fr"
   proxied  = true
+  tags     = []
   ttl      = 1
   type     = "A"
   zone_id  = "935f13b73c1d137163ea96517e12fcb6"
@@ -43,19 +44,6 @@ resource "cloudflare_dns_record" "terraform_managed_resource_db500326295bc66afa4
 resource "cloudflare_dns_record" "terraform_managed_resource_beeda8fccf54ee7fe0e8a48bd32f8ff5_3" {
   content = "khider.fr"
   name    = "jellyfin.khider.fr"
-  proxied = true
-  tags    = []
-  ttl     = 1
-  type    = "CNAME"
-  zone_id = "935f13b73c1d137163ea96517e12fcb6"
-  settings = {
-    flatten_cname = false
-  }
-}
-
-resource "cloudflare_dns_record" "testressource" {
-  content = "khider.fr"
-  name    = "test.khider.fr"
   proxied = true
   tags    = []
   ttl     = 1
