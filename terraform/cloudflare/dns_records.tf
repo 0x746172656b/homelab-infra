@@ -55,7 +55,7 @@ resource "cloudflare_dns_record" "terraform_managed_resource_beeda8fccf54ee7fe0e
 
 resource "cloudflare_dns_record" "testressource" {
   content = "khider.fr"
-  name    = "test.khider.fr"
+  name    = "tesst.khider.fr"
   proxied = true
   tags    = []
   ttl     = 1
