@@ -51,7 +51,7 @@ defined in `ansible/inventory.ini`.
 
 ### DNS (Terraform)
 
-`terraform/cloudflare/` declares every record in the `khider.fr` Cloudflare zone — the
+`terraform/cloudflare/` declares every record in the `khider.fr` Cloudflare zone: the
 apex `A` record (pointed at the home IP, kept out of Git as a sensitive variable), the
 per-service `CNAME`s (Authentik, Jellyfin, Sonarr, qBittorrent, Nextcloud, …), and the
 mail records (MX, SPF, DKIM, DMARC). State and runs live in Terraform Cloud
