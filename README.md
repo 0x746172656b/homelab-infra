@@ -1,12 +1,12 @@
 # k8s-homelab
 
 A self-hosted homelab managed entirely from Git. A Talos Kubernetes cluster is
-reconciled by Flux, and a set of Docker hosts is reconciled by Ansible. Pushing to
-`main` is the only deploy step.
+reconciled by Flux, a set of Docker hosts is reconciled by Ansible, and public DNS is
+managed with Terraform. Pushing to `main` is the only deploy step.
 
 ## Architecture
 
-Two control planes, one repo:
+Three control planes, one repo:
 
 - **Kubernetes** runs on a 3-node Talos Linux cluster. Flux watches this repo and
   applies the desired state on an interval, with pruning, so the cluster always matches
@@ -14,12 +14,16 @@ Two control planes, one repo:
 - **Docker** runs on a Synology NAS and an Ubuntu VM. A self-hosted GitHub Actions
   runner triggers Ansible whenever anything under `ansible/` changes, which renders and
   brings up the Compose stacks on each host.
+- **DNS** for the `khider.fr` zone is declared in Terraform and applied through
+  Terraform Cloud. A GitHub Actions workflow plans on pull requests and applies on push
+  to `main` whenever anything under `terraform/` changes.
 
 ```mermaid
 flowchart LR
     push[git push to main] --> repo[(this repo)]
     repo -->|Flux, reconciled hourly| k8s[Talos Kubernetes]
     repo -->|GitHub Actions + Ansible| docker[Docker hosts]
+    repo -->|GitHub Actions + Terraform Cloud| dns[Cloudflare DNS]
 ```
 
 ## How it works
@@ -44,6 +48,16 @@ repositories, so every upgrade is an explicit, reviewable change in Git.
 `ansible/deploy-homelab.yml`. The playbook copies each stack's `docker-compose.yaml`
 to the target host and runs `docker compose up`, idempotently, for two host groups
 defined in `ansible/inventory.ini`.
+
+### DNS (Terraform)
+
+`terraform/cloudflare/` declares every record in the `khider.fr` Cloudflare zone — the
+apex `A` record (pointed at the home IP, kept out of Git as a sensitive variable), the
+per-service `CNAME`s (Authentik, Jellyfin, Sonarr, qBittorrent, Nextcloud, …), and the
+mail records (MX, SPF, DKIM, DMARC). State and runs live in Terraform Cloud
+(organization `Tarek-Corp`, workspace `cloudflare-terraform`).
+`.github/workflows/terraform.yml` runs `terraform plan` on pull requests and
+`terraform apply` on push to `main`, so DNS changes are reviewed before they go live.
 
 ## What's running
 
@@ -91,6 +105,7 @@ reviewable.
 ├── infrastructure/          # cluster-wide infra, reconciled first
 ├── apps/                    # Helm-based application workloads
 ├── synology-nas/            # cluster storage class (Synology CSI)
+├── terraform/cloudflare/    # Cloudflare DNS records (Terraform Cloud)
 ├── ansible/                 # Docker Compose stacks + playbook
 │   ├── docker/              # per-host, per-stack compose files
 │   ├── inventory.ini
