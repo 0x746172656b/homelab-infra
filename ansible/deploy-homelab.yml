@@ -18,6 +18,12 @@
       include_tasks: tasks/deploy_stacks.yaml
       loop: "{{ docker_stacks }}"
 
+    - name: Prune dangling images
+      ansible.builtin.command:
+        cmd: "{{ docker_cli }} image prune -f --filter dangling=true"
+      register: prune_result
+      changed_when: "'Total reclaimed space: 0B' not in prune_result.stdout"
+
 - name: Sync Ubuntu VM Docker Stacks
   hosts: ubuntu_hosts
   vars:
@@ -34,3 +40,9 @@
     - name: Run Ubuntu Deployments
       include_tasks: tasks/deploy_stacks.yaml
       loop: "{{ docker_stacks }}"
+
+    - name: Prune dangling images
+      ansible.builtin.command:
+        cmd: "{{ docker_cli }} image prune -f --filter dangling=true"
+      register: prune_result
+      changed_when: "'Total reclaimed space: 0B' not in prune_result.stdout"
