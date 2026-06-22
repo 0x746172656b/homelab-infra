@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: khider-fr-ingress-route
+  namespace: web
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`khider.fr`) || Host(`www.khider.fr`)
+      services:
+        - name: khider-fr
+          port: 80
+  tls:
+    secretName: khider-fr-cert
