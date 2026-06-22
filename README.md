@@ -72,6 +72,7 @@ mail records (MX, SPF, DKIM, DMARC). State and runs live in Terraform Cloud
 | Jellyfin               | Media server, GPU transcoding via the device plugin below     |
 | Sonarr / Prowlarr      | Media automation                                              |
 | generic-device-plugin  | Exposes `/dev/dri` to the cluster for hardware transcoding     |
+| khider.fr              | Personal static website (nginx), public at `khider.fr`        |
 
 ### On Docker
 
