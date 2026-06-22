@@ -54,6 +54,19 @@ resource "cloudflare_dns_record" "terraform_managed_resource_beeda8fccf54ee7fe0e
   }
 }
 
+resource "cloudflare_dns_record" "qr_khider_fr_test" {
+  content = "khider.fr"
+  name    = "qr.khider.fr"
+  proxied = true
+  tags    = []
+  ttl     = 1
+  type    = "CNAME"
+  zone_id = "935f13b73c1d137163ea96517e12fcb6"
+  settings = {
+    flatten_cname = false
+  }
+}
+
 resource "cloudflare_dns_record" "terraform_managed_resource_a55c47e527eead0137948464d35bf869_4" {
   content = "khider.fr"
   name    = "sonarr.khider.fr"
