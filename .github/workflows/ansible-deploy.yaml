@@ -35,4 +35,4 @@ jobs:
         run: |
           cd ansible
           ansible-playbook -i inventory.ini deploy-homelab.yml
-          docker image prune -af
+          docker image prune -f --filter "dangling=true"
