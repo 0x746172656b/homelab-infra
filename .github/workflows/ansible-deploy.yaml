@@ -29,7 +29,13 @@ jobs:
           touch ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
+      - name: Validate Playbook
+        run: |
+          cd ansible
+          ansible-playbook -i inventory.ini deploy-homelab.yml --syntax-check
+
       - name: Run Playbook
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
         run: |
