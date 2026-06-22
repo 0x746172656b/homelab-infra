@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`khider.fr`) || Host(`www.khider.fr`)
+      match: Host(`khider.fr`) || Host(`www.khider.fr`) || Host(`local.khider.fr`) 
       services:
         - name: khider-fr
           port: 80
