@@ -28,4 +28,3 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - grafana.local.khider.fr
-    - grafana.khider.fr
