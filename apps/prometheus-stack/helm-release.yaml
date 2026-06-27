@@ -17,3 +17,21 @@ spec:
         name: prometheus-community
         namespace: prometheus-stack
   interval: 1h0m0s
+  values:
+    grafana:
+      persistence:
+        enabled: true
+        type: pvc
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
+    prometheus:
+      prometheusSpec:
+        retention: 30d
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 10Gi
