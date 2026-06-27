@@ -12,7 +12,7 @@ spec:
       match: Host(`grafana.local.khider.fr`)
       services:
         - name: kube-prometheus-stack-grafana
-          port: 3000
+          port: 80
   tls:
     secretName: grafana-cert
 ---
