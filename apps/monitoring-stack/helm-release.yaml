@@ -6,8 +6,15 @@ metadata:
 spec:
   releaseName: kube-prometheus-stack
   targetNamespace: monitoring
+  timeout: 15m
   install:
     createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
   chart:
     spec:
       chart: kube-prometheus-stack
