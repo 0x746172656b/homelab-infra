@@ -118,6 +118,4 @@ reviewable.
 
 ## Roadmap
 
-- Full observability: Prometheus for metrics and Loki for logs, feeding the existing
-  Grafana, with Alertmanager for alerting.
 - Backup and disaster recovery for persistent volumes and application data.
