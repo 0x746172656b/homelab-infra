@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: smartctl-synology-scrape
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  metricsPath: /metrics
+  scrapeInterval: 2m
+  staticConfigs:
+    - targets:
+        - 10.10.93.22:9633
+      labels:
+        synology_node: "synology-nas"
