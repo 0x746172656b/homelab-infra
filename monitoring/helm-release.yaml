@@ -49,7 +49,9 @@ spec:
           proxmox-via-prometheus:
             gnetId: 10347
             revision: 5
-            datasource: Prometheus
+            datasource:
+              - name: DS_PROMETHEUS
+                value: prometheus
     prometheus:
       prometheusSpec:
         retention: 30d
