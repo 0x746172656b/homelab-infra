@@ -13,6 +13,7 @@ id_rsa*
 !.env.example
 secret*.yaml
 !secret*.sops.yaml
+credentials-velero
 
 .cache_ggshield
 
