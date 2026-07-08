@@ -1,0 +1,16 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: grafana-weekly
+  namespace: velero
+spec:
+  schedule: "0 5 * * 0"
+  useOwnerReferencesInBackup: false
+  template:
+    includedNamespaces:
+      - monitoring
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: grafana
+    snapshotMoveData: true
+    ttl: 336h

@@ -1,0 +1,13 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: media-daily
+  namespace: velero
+spec:
+  schedule: "0 4 * * *"
+  useOwnerReferencesInBackup: false
+  template:
+    includedNamespaces:
+      - media
+    snapshotMoveData: true
+    ttl: 336h
