@@ -72,6 +72,7 @@ mail records (MX, SPF, DKIM, DMARC). State and runs live in Terraform Cloud
 | Jellyfin               | Media server, GPU transcoding via the device plugin below     |
 | Sonarr / Prowlarr      | Media automation                                              |
 | generic-device-plugin  | Exposes `/dev/dri` to the cluster for hardware transcoding     |
+| Velero                 | Off-site backups of stateful workloads to Cloudflare R2       |
 | khider.fr              | Personal static website (nginx), public at `khider.fr`        |
 
 ### On Docker
@@ -91,6 +92,18 @@ safe to keep public. No plaintext credentials live in the tree or its history.
 
 Persistent volumes for the cluster are provisioned over iSCSI by the Synology CSI
 driver (`synology-nas/syno-sc.yaml`).
+
+## Backups
+
+Velero backs up stateful workloads to a Cloudflare R2 bucket, so a copy of every
+important volume lives off the NAS. Each backup takes a CSI snapshot on the Synology,
+then the data mover streams the volume contents to R2 with Kopia, deduplicated and
+incremental. Backup policy is declarative: every app that needs protection carries a
+`backup-schedule.yaml` next to its manifests, reviewed and versioned like everything
+else. Daily backups cover Authentik, n8n, and the media configs; Grafana runs weekly;
+retention is 14 days. Prometheus data and stateless workloads are deliberately
+excluded, since Flux rebuilds the latter from this repo. R2 credentials are committed
+as a Sealed Secret like every other secret in the tree.
 
 ## Updates
 
@@ -118,4 +131,6 @@ reviewable.
 
 ## Roadmap
 
-- Backup and disaster recovery for persistent volumes and application data.
+- Application-consistent database backups: pg_dump hooks for Authentik's Postgres
+  ahead of the volume snapshot.
+- Periodic restore drills to prove backups round-trip.
