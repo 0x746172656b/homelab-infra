@@ -19,3 +19,29 @@ spec:
     createNamespace: true
     remediation:
       retries: 3
+  values:
+    initContainers:
+      - name: velero-plugin-for-aws
+        image: velero/velero-plugin-for-aws:v1.14.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
+    credentials:
+      useSecret: true
+      existingSecret: velero-r2-credentials
+    configuration:
+      features: EnableCSI
+      defaultSnapshotMoveData: true
+      backupStorageLocation:
+        - name: default
+          provider: aws
+          bucket: velero-backup
+          default: true
+          config:
+            region: auto
+            s3ForcePathStyle: "true"
+            s3Url: https://b3feeccbd92acbd9415cb3add60d6826.r2.cloudflarestorage.com
+            checksumAlgorithm: ""
+    snapshotsEnabled: false
+    deployNodeAgent: true
