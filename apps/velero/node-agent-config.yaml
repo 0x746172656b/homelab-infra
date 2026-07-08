@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-agent-config
+  namespace: velero
+data:
+  node-agent-config.json: |
+    {
+      "backupPVC": {
+        "synostorage-discard": {
+          "storageClass": "synostorage-backup"
+        }
+      }
+    }

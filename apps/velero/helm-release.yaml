@@ -45,3 +45,6 @@ spec:
             checksumAlgorithm: ""
     snapshotsEnabled: false
     deployNodeAgent: true
+    nodeAgent:
+      extraArgs:
+        - --node-agent-configmap=node-agent-config

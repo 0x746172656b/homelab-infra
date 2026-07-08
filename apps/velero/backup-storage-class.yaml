@@ -1,0 +1,14 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: synostorage-backup
+provisioner: csi.san.synology.com
+parameters:
+  dsm: 10.10.93.22
+  fsType: xfs
+  location: /volume2
+mountOptions:
+  - nouuid
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
