@@ -22,7 +22,7 @@ spec:
 
     controllers:
       khider-fr:
-        replicas: 2
+        replicas: 1
         containers:
           main:
             image:
