@@ -25,6 +25,12 @@ spec:
         namespace: monitoring
   interval: 1h0m0s
   values:
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
     grafana:
       persistence:
         enabled: true
