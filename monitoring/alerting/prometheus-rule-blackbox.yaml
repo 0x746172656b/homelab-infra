@@ -1,0 +1,46 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: blackbox-probe-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: BlackboxAlerts
+      rules:
+        - alert: PublicEndpointDown
+          expr: probe_success == 0
+          for: 3m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Public endpoint {{ $labels.instance }} is failing its probe"
+            description: "The blackbox probe for {{ $labels.instance }} has failed for 3 minutes. The endpoint is unreachable or not returning a 2xx response from inside the network, so it is almost certainly down for external visitors as well."
+
+        - alert: PublicEndpointSlow
+          expr: avg_over_time(probe_duration_seconds[10m]) > 5
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Public endpoint {{ $labels.instance }} is responding slowly"
+            description: "The full probe (DNS, connect, TLS, first byte) for {{ $labels.instance }} has averaged {{ $value | humanizeDuration }} over the last 10 minutes. The endpoint is up but degraded."
+
+        - alert: TLSCertificateExpiringSoon
+          expr: (probe_ssl_earliest_cert_expiry - time()) / 86400 < 14
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "TLS certificate for {{ $labels.instance }} expires in under 14 days"
+            description: "The certificate presented to the probe for {{ $labels.instance }} expires in {{ $value | humanize }} days. Renewal is automated end to end, so reaching this alert means the automation is broken and needs investigation."
+
+        - alert: TLSCertificateExpiryImminent
+          expr: (probe_ssl_earliest_cert_expiry - time()) / 86400 < 3
+          for: 15m
+          labels:
+            severity: critical
+          annotations:
+            summary: "TLS certificate for {{ $labels.instance }} expires in under 3 days"
+            description: "The certificate presented to the probe for {{ $labels.instance }} expires in {{ $value | humanize }} days. Visitors will start seeing certificate errors when it lapses."
