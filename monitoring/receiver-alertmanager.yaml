@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: pushover-notifications
+  namespace: monitoring
+  labels:
+    alertmanagerConfig: global-pushover
+spec:
+  route:
+    receiver: 'pushover-receiver'
+    matchers:
+      - name: alertname
+        matchType: '!='
+        value: Watchdog
+    groupBy: ['alertname', 'namespace']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+  receivers:
+    - name: 'pushover-receiver'
+      pushoverConfigs:
+        - userKey:
+            name: pushover-credentials
+            key: user-key
+          token:
+            name: pushover-credentials
+            key: api-token

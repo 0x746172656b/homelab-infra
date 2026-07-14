@@ -64,6 +64,8 @@ spec:
                   storage: 20Gi
     alertmanager:
       alertmanagerSpec:
+        alertmanagerConfigMatcherStrategy:
+          type: None
         storage:
           volumeClaimTemplate:
             spec:
