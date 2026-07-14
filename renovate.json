@@ -3,5 +3,13 @@
   "extends": ["config:recommended"],
   "flux": {
     "managerFilePatterns": ["/(^|/)helm-(release|repository)\\.yaml$/"]
-  }
+  },
+  "packageRules": [
+    {
+      "description": "kube-prometheus-stack cuts releases many times a week; only PR major versions",
+      "matchPackageNames": ["kube-prometheus-stack"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "enabled": false
+    }
+  ]
 }
