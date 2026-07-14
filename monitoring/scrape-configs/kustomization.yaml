@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - scrapeconfig-pve-exporter.yaml
   - scrapeconfig-smart-nas.yaml
+  - scrapeconfig-blackbox-khider-fr.yaml

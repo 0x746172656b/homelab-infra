@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: blackbox-public-endpoints
+  namespace: monitoring
+spec:
+  metricsPath: /probe
+  params:
+    module: [http_2xx]
+  staticConfigs:
+    - targets:
+        - https://khider.fr
+  relabelings:
+    - sourceLabels: [__address__]
+      targetLabel: __param_target
+    - sourceLabels: [__param_target]
+      targetLabel: instance
+    - targetLabel: __address__
+      replacement: 10.10.93.22:9115
+
