@@ -31,13 +31,16 @@ flowchart LR
 ### Kubernetes (Flux)
 
 Flux is bootstrapped from `clusters/homelab-prod/flux-system`, which defines the Git
-source. Two Flux Kustomizations reconcile the rest of the repo every hour with
-`prune: true`:
+source. Three Flux Kustomizations, themselves version-controlled in
+`clusters/homelab-prod/`, reconcile the rest of the repo every hour with
+`prune: true`. Monitoring and apps declare `dependsOn: infrastructure-sync`, so
+controllers and Helm sources are always in place before workloads reconcile:
 
-| Kustomization         | Path              | Contents                                    |
-| --------------------- | ----------------- | ------------------------------------------- |
-| `infrastructure-sync` | `./infrastructure`| Helm repositories, generic-device-plugin    |
-| `apps-sync`           | `./apps`          | All application workloads                   |
+| Kustomization         | Path              | Contents                                                    |
+| --------------------- | ----------------- | ----------------------------------------------------------- |
+| `infrastructure-sync` | `./infrastructure`| Helm sources, Traefik, cert-manager, Velero, device plugin  |
+| `monitoring-sync`     | `./monitoring`    | kube-prometheus-stack, ingress, alerting, scrape configs    |
+| `apps-sync`           | `./apps`          | All application workloads                                   |
 
 Applications are deployed as Flux `HelmRelease` resources pinned to versioned Helm
 repositories, so every upgrade is an explicit, reviewable change in Git.
@@ -115,17 +118,19 @@ reviewable.
 
 ```
 .
-├── clusters/homelab-prod/   # Flux bootstrap (Git source + sync)
+├── clusters/homelab-prod/   # Flux bootstrap + the three sync Kustomizations
+│   └── flux-system/         # Git source (gotk)
 ├── infrastructure/          # cluster-wide infra, reconciled first
+│   ├── sources/             # shared Helm repositories
+│   └── controllers/         # Traefik, cert-manager, Velero, device plugin
 ├── apps/                    # Helm-based application workloads
-├── synology-nas/            # cluster storage class (Synology CSI)
+├── monitoring/              # kube-prometheus-stack, ingress, alerting, scrape configs
+├── synology-nas/            # cluster storage class (Synology CSI), applied manually
 ├── terraform/cloudflare/    # Cloudflare DNS records (Terraform Cloud)
 ├── ansible/                 # Docker Compose stacks + playbook
 │   ├── docker/              # per-host, per-stack compose files
 │   ├── inventory.ini
 │   └── deploy-homelab.yml
-├── flux-apps.yaml           # Flux Kustomization: apps
-├── infrastructure-sync.yaml # Flux Kustomization: infrastructure
 └── renovate.json
 ```
 

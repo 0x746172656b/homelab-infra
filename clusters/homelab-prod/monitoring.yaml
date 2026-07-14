@@ -7,6 +7,8 @@ spec:
   interval: 1h
   path: ./monitoring
   prune: true
+  dependsOn:
+    - name: infrastructure-sync
   sourceRef:
     kind: GitRepository
     name: flux-system

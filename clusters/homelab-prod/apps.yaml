@@ -5,8 +5,10 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h
-  path: ./apps/
+  path: ./apps
   prune: true
+  dependsOn:
+    - name: infrastructure-sync
   sourceRef:
     kind: GitRepository
     name: flux-system
