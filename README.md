@@ -83,7 +83,7 @@ mail records (MX, SPF, DKIM, DMARC). State and runs live in Terraform Cloud
 | Host             | Stacks                                            |
 | ---------------- | ------------------------------------------------- |
 | Ubuntu VM        | BIND (DNS), Nextcloud, Nginx Proxy Manager, Traefik |
-| Synology NAS     | MariaDB, qBittorrent, Uptime Kuma                  |
+| Synology NAS     | MariaDB, qBittorrent                               |
 
 ## Secrets
 

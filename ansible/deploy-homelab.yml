@@ -11,7 +11,6 @@
     docker_stacks:
       - mariadb-prod
       - qbittorrent-prod
-      - uptime-kuma
 
   tasks:
     - name: Run NAS Deployments
