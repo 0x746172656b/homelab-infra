@@ -3,6 +3,8 @@ kind: ScrapeConfig
 metadata:
   name: blackbox-public-endpoints
   namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
 spec:
   metricsPath: /probe
   params:
