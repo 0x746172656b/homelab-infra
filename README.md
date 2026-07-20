@@ -2,7 +2,8 @@
 
 A self-hosted homelab managed entirely from Git. A Talos Kubernetes cluster is
 reconciled by Flux, a set of Docker hosts is reconciled by Ansible, and public DNS is
-managed with Terraform. Pushing to `main` is the only deploy step.
+managed with Terraform. Pushing to `main` is the only deploy step. Every Kubernetes
+and Docker VM runs on my Proxmox server.
 
 ## Architecture
 
@@ -80,10 +81,10 @@ mail records (MX, SPF, DKIM, DMARC). State and runs live in Terraform Cloud
 
 ### On Docker
 
-| Host             | Stacks                                            |
-| ---------------- | ------------------------------------------------- |
-| Ubuntu VM        | BIND (DNS), Nextcloud, Nginx Proxy Manager, Traefik |
-| Synology NAS     | MariaDB, qBittorrent                               |
+| Host             | Stacks                                                       |
+| ---------------- | -------------------------------------------------------------- |
+| Ubuntu VM        | BIND (DNS), Nextcloud, Nginx Proxy Manager, Traefik             |
+| Synology NAS     | MariaDB, qBittorrent, blackbox-exporter, smartctl-exporter      |
 
 ## Secrets
 
