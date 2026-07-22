@@ -9,6 +9,7 @@ services:
     ports:
       - "10.10.93.10:53:53/tcp"
       - "10.10.93.10:53:53/udp"
+      - "10.10.93.10:8053:8053/tcp"
     volumes:
       - ./config:/etc/bind
       - ./cache:/var/cache/bind
